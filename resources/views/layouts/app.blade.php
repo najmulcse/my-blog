@@ -12,6 +12,7 @@
     <title>Najmul's Blog</title>
 
     <!-- Bootstrap Core CSS -->
+
     <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Theme CSS -->

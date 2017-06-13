@@ -11,13 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::group(['middleware' => ['auth','isAdmin']], function(){
 
-Route::auth();
 
-Route::get('/home', 'HomeController@index');
-Route::get('admin',function(){
-  return view('admins.index');
+		Route::get('admin',['as' =>'admin','uses' => 'AdminController@index']);
+
+
 });
+		Route::get('/', function () {
+		    return view('welcome');
+		});
+		Route::auth();
+		Route::get('/home', 'HomeController@index');
+		Route::get('blank',function(){
+			return view('blank.b');
+		});
