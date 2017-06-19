@@ -135,13 +135,12 @@
                 <li class="dropdown">
                     <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Sign up as Teacher</a></li>
-                        <li><a href="#">Sign up as Student</a></li>
-                    @else
+                    
 
-                        <li><a href="{{ url('/home') }}">Home</a></li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
+                        @if(Auth::user()->isAdmin())
+                        <li><a href="{{ url('/admin') }}">Admin</a></li>
+                        @endif
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -152,7 +151,7 @@
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
-                    @endif
+                
                 </ul>
                 </li>
             </ul>
@@ -163,10 +162,18 @@
                         <a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="{{route('category')}}"><i class="fa fa-fw fa-table"></i> Categories</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i> Tables</a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#posts"> <i class="fa fa-th-large" aria-hidden="true"></i>   Posts <i class="fa fa-chevron-circle-down pull-right" aria-hidden="true"></i></a>
+                        <ul id="posts" class="collapse">
+                            <li>
+                                <a  href="{{ route('createPost')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Create Post</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-globe" aria-hidden="true"></i>  All posts</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-edit"></i> Forms</a>

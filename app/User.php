@@ -30,4 +30,8 @@ class User extends Authenticatable
     {
         return $this->user_type;
     }
+    public function categories(){
+
+        return $this->hasMany('App\Category');
+    }
 }

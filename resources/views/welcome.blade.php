@@ -10,7 +10,7 @@
                     <div class="site-heading">
                         <h1>Learn Laravel ! </h1>
                         <hr class="small">
-                        <span class="subheading">It's my blog about web programming</span>
+                        <span class="subheading">Web programming | Find a Problem | Make the Solutions</span>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-1 col-md-10 col-sm-10">
+            <div class="col-lg-9 col-lg-offset-0 col-md-10 col-sm-10">
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
@@ -73,12 +73,14 @@
                     </li>
                 </ul>   
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="col-lg-3 col-md-2 col-sm-2">
                 <ul>
-                    <li>Category 1</li>
-                    <li>Category 2</li>
-                    <li>Category 3</li>
-                    <li>Category 4</li>
+                    @if(!empty($categories))
+                        @foreach($categories as $category)
+                          <li> <a href="#">{{$category->title}}</a> </li>
+                        @endforeach
+                           
+                     @endif
                     
                 </ul>
             </div>

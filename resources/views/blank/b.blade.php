@@ -16,6 +16,23 @@
 
   <i id="indicator" class="ic-indicator fa fa-spinner fa-spin ic-transition" ></i> --}}
 
+   
+    <form action="{{url('blank/store')}}" method="POST" role="form">
+    {{csrf_field()}}
+    
+      <legend>Form title</legend>
+    
+      <div class="form-group @if ($errors->has('my')) has-error @endif">
+        <label for="">label</label>
+        <input name="my" type="text" class="form-control" id="" placeholder="Input field">
+
+        {!!$errors->first('my','<span class="help-block">:message</span>')!!}
+      </div>
+    
+      
+    
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
    <div class="btn-group" ic-indicator="#indicator" ic-include="#checked-contacts" ic-target="#contactTableBody">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
