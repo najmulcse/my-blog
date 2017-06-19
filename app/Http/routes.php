@@ -17,7 +17,7 @@ Route::group(['middleware' => ['auth','isAdmin']], function(){
 		Route::get('admin',['as' =>'admin','uses' => 'AdminController@index']);
 		Route::get('category',['as' =>'category' ,'uses' => 'AdminController@category']);
 		Route::post('category/store',['as' =>'cStore','uses' => 'AdminController@categoryStore']);
-		Route::get('/create',['as' => 'createPost' ,'uses' => 'AdminController@createPost']);
+		Route::get('post/create',['as' => 'createPost' ,'uses' => 'AdminController@createPost']);
 
 
 });
