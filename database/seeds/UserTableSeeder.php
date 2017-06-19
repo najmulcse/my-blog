@@ -11,6 +11,10 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+       $faker =Faker\Factory::create();
+       
+       //For admin
+
        DB::table('users')->insert([
 
             'name'      => 'Najmul ' ,
@@ -22,5 +26,23 @@ class UserTableSeeder extends Seeder
             'updated_at'=> \Carbon\Carbon::now()	
 
              ]);
+
+       //For users
+
+       for($i=2 ;$i <10; $i++)
+       {
+        DB::table('users')->insert([
+
+             'name'      => $faker->name ,
+             'email'        => 'user'.$i.'@gmail.com',
+             'password' => bcrypt('123456'),
+             'user_type'    => 2,
+             'photo'        => "",
+             'created_at'=> \Carbon\Carbon::now(),
+             'updated_at'=> \Carbon\Carbon::now()   
+
+              ]);
+
+       }
     }
 }

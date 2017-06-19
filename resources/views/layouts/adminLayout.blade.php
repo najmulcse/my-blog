@@ -159,7 +159,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="{{ route('admin')}}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="{{route('category')}}"><i class="fa fa-fw fa-table"></i> Categories</a>
@@ -171,7 +171,7 @@
                                 <a  href="{{ route('createPost')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Create Post</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-globe" aria-hidden="true"></i>  All posts</a>
+                                <a href="{{route('allPostAdmin')}}"><i class="fa fa-globe" aria-hidden="true"></i>  All posts</a>
                             </li>
                         </ul>
                     </li>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Category;
 use Validate;
+use App\Post;
+use App\PostType;
 class AdminController extends Controller
 {
     public function __construct()
@@ -17,13 +19,15 @@ class AdminController extends Controller
 
     public function index()
     {
-    	return view('admins.index');
+        $posts      = Post::all();
+        $categories = Category::all();
+    	return view('admins.index',compact('posts','categories'));
     }
 
     public function category()
     {
         $categories = Category::orderBy('created_at','desc')->get();
-        return view('categories.category',compact('categories'));
+        return view('admins.categories.category',compact('categories'));
     }
     public function categoryStore(Request $request){
 
@@ -40,7 +44,8 @@ class AdminController extends Controller
     public function createPost()
     {
         $categories = Category::orderBy('created_at','desc')->get();
-        return view('posts.create',compact('categories'));
+        $postTypes   = PostType::all();
+        return view('admins.posts.create',compact('categories','postTypes'));
     }
 
     public function valid(Request $req)

@@ -29,8 +29,10 @@
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>New Comments!</div>
+                                    @if($p = count($posts))
+                                        <div class="huge">{{$p}}</div>
+                                    @endif  
+                                        <div>Total Posts!</div>
                                     </div>
                                 </div>
                             </div>
@@ -51,8 +53,10 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>New Tasks!</div>
+                                    @if($c = count($categories))
+                                        <div class="huge">{{$c}}</div>
+                                    @endif  
+                                        <div>Total Categories!</div>
                                     </div>
                                 </div>
                             </div>

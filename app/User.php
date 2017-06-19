@@ -28,10 +28,15 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->user_type;
+        return $this->user_type == 1;
     }
     public function categories(){
 
         return $this->hasMany('App\Category');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
     }
 }

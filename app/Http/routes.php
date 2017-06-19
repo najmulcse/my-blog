@@ -18,6 +18,11 @@ Route::group(['middleware' => ['auth','isAdmin']], function(){
 		Route::get('category',['as' =>'category' ,'uses' => 'AdminController@category']);
 		Route::post('category/store',['as' =>'cStore','uses' => 'AdminController@categoryStore']);
 		Route::get('post/create',['as' => 'createPost' ,'uses' => 'AdminController@createPost']);
+		Route::post('post/store', ['as' => 'storePost' ,'uses' => 'PostController@storePost']);
+		Route::get('allposts',['as' => 'allPostAdmin','uses' => 'PostController@allPostSeeByAdmin']);
+		Route::get('post/{pid}/edit',['as'=>'editPost' ,'uses'=>'PostController@edit']);
+		Route::patch('post/{pid}/update',['as' => 'postUpdate','uses' =>'PostController@update']);
+		Route::get('post/{pid}/details',['as' =>'individualPostDetails','uses' =>'PostController@details']);
 
 
 });
@@ -25,6 +30,7 @@ Route::group(['middleware' => ['auth','isAdmin']], function(){
 Route::group(['middlewaregroups' =>['web']],function(){
 		Route::auth();
 		Route::get('/', 'HomeController@index');
+		Route::get('category/{cid}/view',['as' =>'viewCategory','uses' =>'PostController@viewCategory']);
 		Route::get('blank',function(){
 			return view('blank.b');
 		});

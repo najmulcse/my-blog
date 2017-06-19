@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePost extends Migration
+class CreateTableContent extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,10 @@ class CreateTablePost extends Migration
      */
     public function up()
     {
-        Schema::create('=posts', function (Blueprint $table) {
+        Schema::create('contents', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('post_id');
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ class CreateTablePost extends Migration
      */
     public function down()
     {
-        Schema::drop('=posts');
+        Schema::drop('contents');
     }
 }

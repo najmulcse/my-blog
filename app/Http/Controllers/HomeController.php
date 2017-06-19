@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Category;
+use App\Post;
+use App\User;
+use App\PostType;
 
 class HomeController extends Controller
 {
@@ -26,6 +29,8 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::orderBy('created_at','desc')->get();
-        return view('welcome',compact('categories'));
+        $type       = PostType::where('type','public')->first()->id;
+        $posts      = Post::where('post_type',$type)->orderBy('created_at','desc')->get();
+        return view('welcome',compact('categories','posts'));
     }
 }
