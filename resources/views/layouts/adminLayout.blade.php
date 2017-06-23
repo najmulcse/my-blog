@@ -7,10 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
 
     <title>Blog Admin</title>
 
+    <!-- jQuery -->
+   <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="http://cdn.intercoolerjs.org/intercooler-1.1.2.min.js"></script>
+   <!-- Morris Charts JavaScript -->
+   {{--  <script src="{{asset('js/plugins/morris/raphael.min.js')}}"></script>
+    <script src="{{asset('js/plugins/morris/morris.min.js')}}"></script>
+    <script src="{{asset('js/plugins/morris/morris-data.js')}}"></script>
+    <!-- Bootstrap Core JavaScript --> --}}
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -221,16 +232,9 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="{{asset('js/jquery.js')}}"></script>
+    
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="{{asset('js/plugins/morris/raphael.min.js')}}"></script>
-    <script src="{{asset('js/plugins/morris/morris.min.js')}}"></script>
-    <script src="{{asset('js/plugins/morris/morris-data.js')}}"></script>
+    
 
 </body>
 

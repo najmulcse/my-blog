@@ -111,4 +111,13 @@ class PostController extends Controller
         $categories = Category::all();
         return view('categories.viewAllCat',compact('posts','categories'));
     }
+
+
+    public function categoryEditAjax()
+    {
+        if(Request::ajax()){
+             return "var_dump(Response::json())";
+        }
+       
+    }
 }

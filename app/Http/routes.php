@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth','isAdmin']], function(){
 		Route::get('post/{pid}/edit',['as'=>'editPost' ,'uses'=>'PostController@edit']);
 		Route::patch('post/{pid}/update',['as' => 'postUpdate','uses' =>'PostController@update']);
 		Route::get('post/{pid}/details',['as' =>'individualPostDetails','uses' =>'PostController@details']);
-
+		Route::get('categoryEditAjax',['as' => 'cat_ajax','uses'=>'PostController@categoryEditAjax']);
 
 });
 
