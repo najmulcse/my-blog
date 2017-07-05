@@ -52,9 +52,9 @@
 			@foreach($posts as $post)
 				<tr>
 					<td>{{$post->id}}</td>
-					<td>{{$post->user->where('id',$post->user_id)->first()->name}}</td>
-					<td>{{$post->category->where('id',$post->category_id)->first()->title}}</td>
-					<td>{{$post->postType->where('id',$post->post_type)->first()->type}}</td>
+					<td>{{$post->user->name}}</td>
+					<td>{{$post->category->title}}</td>
+					<td>{{$post->postType->type}}</td>
 					<td>{{$post->title}}</td>
 					<td>{{$post->body}}</td>
 					<td><a href="{{route('individualPostDetails',['pid' =>$post->id])}}" class="btn btn-sm btn-primary">Details</a></td>

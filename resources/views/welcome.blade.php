@@ -25,7 +25,7 @@
                 @if(!empty($posts))
                     @foreach($posts as $post)
                         <div class="post-preview">
-                            <a href="#">
+                            <a href="{{route('postDetails',['pid'=>$post->id,'cid'=>$post->category_id])}}">
                                 <h2 class="post-title">
                                    {{$post->title}}
                                 </h2>
@@ -39,7 +39,7 @@
                                     <br>
                                 @endforeach
                             @endif
-                            <p class="post-meta">Posted by <a href="#">{{$post->user->where('id',$post->user_id)->first()->name}}</a> on September 24, 2014</p>
+                            <p class="post-meta">Posted by <a href="#">{{$post->user->name}}</a> on {{$post->created_at}}</p>
                         </div>
                         <hr>
                     @endforeach
@@ -54,6 +54,7 @@
                 </ul>   
             </div>
             <div class="col-lg-3 col-md-2 col-sm-2">
+             <h2>Categories</h2>
                 <ul>
                     @if(!empty($categories))
                         @foreach($categories as $category)

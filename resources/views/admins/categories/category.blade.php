@@ -36,14 +36,14 @@
 						
 					</tr>
 				</thead>
-				<tbody>	
+				<tbody >	
 					@if(!empty($categories))
 						@foreach($categories as $category)
-						<tr>
+						<tr id="cat_table{{$category->id}}">
 						<td>{{$category->title}}</td>
 						<td >
 							<button class="btn btn-info open-modal" value="{{$category->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-							<a href="#" class="btn btn-danger delete-task"><i class="fa fa-trash" aria-hidden="true"></i> </a>
+							<button class="btn btn-danger delete-task delete-modal" value="{{$category->id}}"><i class="fa fa-trash" aria-hidden="true"></i> </button>
 						</td>
 						</tr>
 						@endforeach
@@ -62,65 +62,69 @@
                    <div class="modal-content">
                        <div class="modal-header">
                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                           <h4 class="modal-title" id="myModalLabel">Task Editor</h4>
+                           <h4 class="modal-title" id="myModalLabel">Category Edit</h4>
                        </div>
                        <div class="modal-body">
                            <form id="frmTasks" name="frmTasks" class="form-horizontal" novalidate="">
 
                                <div class="form-group error">
-                                   <label for="inputTask" class="col-sm-3 control-label">Task</label>
+                                   <label for="inputTask" class="col-sm-3 control-label">Category Name</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control has-error" id="task" name="task" placeholder="Task" value="">
+                                       <input type="text" class="form-control has-error" id="title" name="title" placeholder="Task" value="">
                                    </div>
                                </div>
 
-                               <div class="form-group">
-                                   <label for="inputEmail3" class="col-sm-3 control-label">Description</label>
-                                   <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="">
-                                   </div>
-                               </div>
+                               
                            </form>
                        </div>
                        <div class="modal-footer">
-                           <button type="button" class="btn btn-primary" id="btn-save" value="add">Save changes</button>
-                           <input type="hidden" id="task_id" name="task_id" value="0">
+                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                           <button type="button" class="btn btn-primary" id="update_cat">Update</button>
+                           <input type="hidden" id="cat_id" name="cat_id" value="0">
                        </div>
                    </div>
                </div>
            </div>
 
+<!--modal,For deleting category -->
 
-           <script >
-           	$.ajaxSetup({
+<div class="modal fade" id="modal-id-delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Delete Category</h4>
+      </div>
+      <div class="modal-body">
+        <h2>Are you sure to delete this category?</h2>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="delete-confirm">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+           <script type="text/javascript">
            
-          });
+           
+         
            	$(document).ready(function(){
-                var url = "categoryEditAjax";
+
+                var url = "/categoryEditAjax/";
                 //display modal form for task editing
-                   $('.open-modal').click(function(){
+                $('.open-modal').click(function(){
                        var cat_id = $(this).val();
-                        console.log(cat_id);
-                        $('#myModal').modal('show');
-                       // $.get(url , function (data) {
-                       //     //success data
-                       //     console.log(data);
-                       //     // $('#task_id').val(data.id);
-                       //     // $('#task').val(data.task);
-                       //     // $('#description').val(data.description);
-                       //     // $('#btn-save').val("update");
 
-                       //      $('#myModal').modal('show');
-                       // }) 
-
-                       $.ajax({
-                        url     : "categoryEditAjax",
-                        headers : {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                  },
+                $.ajax({
+                        url      : url + cat_id,
+                        type     : "GET",
                         dataType :'json',
-                        success  : function(data){
-                                  console.log(data);
+                        success  : function(data){    
+                                     $('#cat_id').val(data.id);
+                                     $('#title').val(data.title);
+                                     $('#myModal').modal('show');
+                                     console.log(data);
                             },
                         error : function(err){
                                   console.log(err);
@@ -128,6 +132,68 @@
 
                        });
                    });
+
+
+            $('#update_cat').click(function(e){
+                      $.ajaxSetup({
+                        headers: {
+                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                      }
+                      });
+                     e.preventDefault();
+                     var formDatas = {
+
+                      title  : $('#title').val() 
+                     
+                     }  
+                    // console.log(formDatas);
+                     var cat_id = $('#cat_id').val();
+
+                     $.ajax({
+                      url        : "/categoryUpdateAjax/" + cat_id ,
+                      type       : "PUT" ,
+                      dataType   : 'json' ,
+                      headers    : {
+                                  'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                              },
+                      data       : formDatas,
+                      success    : function(data){
+
+                                  console.log(data);
+                                  $('title'+cat_id).replaceWith('#title');
+                                  $('#frmTasks').trigger("reset");
+                                  $('myModal').modal('hide');
+                      },
+                      error      : function(err){
+                                  console.log(err);
+                      }
+                     });                 
+
+                });
+
+
+            // Delete category
+            $('.delete-modal').click(function(){
+                  var cat_id = $(this).val();
+                  $('#modal-id-delete').modal('show');
+
+                  $('#delete-confirm').click(function(){
+
+                  $.ajax({
+                    url       : "/deleteCategory/"+cat_id,
+                    type      : "GET" ,
+                    dataType  :'json',
+                    success   : function(data){
+                              console.log(data);
+                              $('#cat_table'+cat_id).remove();
+                              $('#modal-id-delete').modal('hide');
+                    },
+                    error     :function(err){
+                              console.log(err);
+                    }
+                  });
+              });
+            });
 
             });
            		

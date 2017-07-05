@@ -3,31 +3,32 @@
 
 @section('content')
 
-<div class="container >
+<div class="container ">
     <div class="row">
         <div class="col-lg-9 col-lg-offset-0 col-md-10 col-sm-10">
 
-            @if(!empty($posts))
-                @foreach($posts as $post)
+            @if(!empty($post))
+               
                     <div class="post-preview">
-                        <a href="{{route('postDetails',['pid'=>$post->id,'cid'=>$post->category_id])}}">
+                        <a href="#">
                             <h2 class="post-title">
                                {{$post->title}}
                             </h2>
+                        </a>
                             <h3 class="post-subtitle">
                                 {{$post->body}}
                             </h3>
-                        </a>
+                       
                         @if($contents=$post->contents)
                             @foreach($contents as $content)
                                 <a href="#" class="">{{$content->content}}</a>
                                 <br>
                             @endforeach
                         @endif
-                        <p class="post-meta">Posted by <a href="#">{{$post->user->where('id',$post->user_id)->first()->name}}</a> on September 24, 2014</p>
+                        <p class="post-meta">Posted by <a href="#">{{$post->user->name}}</a> {{$post->created_at}}</p>
                     </div>
                     <hr>
-                @endforeach
+               
             @endif
 
             

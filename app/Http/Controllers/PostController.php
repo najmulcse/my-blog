@@ -108,16 +108,36 @@ class PostController extends Controller
         $posts   = Post::where('category_id',$cid)
                         ->orderBy('created_at','desc')
                         ->get();
-        $categories = Category::all();
+         $categories = Category::orderBy('created_at','desc')->get();
         return view('categories.viewAllCat',compact('posts','categories'));
     }
 
 
-    public function categoryEditAjax()
+    public function categoryEditByAjax($id)
     {
-        if(Request::ajax()){
-             return "var_dump(Response::json())";
-        }
+             $cats = Category::findOrFail($id);
+            return json_encode($cats);    
        
+    }
+    public function categoryUpdateByAjax(Request $request , $id)
+    {
+        
+        $cat  = Category::find($id);
+        $cat->title  = $request->title ;
+        $cat->save();
+        return Response::json($cat);
+    }
+    public function deleteCategory($id){
+        $cat = Category::findOrFail($id)->delete();
+        Post::where('category_id',$id)->delete();
+        return json_encode($cat);
+    }
+
+
+    public function postDetails($cid,$pid)
+    {
+        $post = Post::findOrFail($pid);
+        $categories = Category::orderBy('created_at','desc')->get();
+        return view('posts.postDetails',compact('post','categories'));
     }
 }

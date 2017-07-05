@@ -14,11 +14,11 @@ class Post extends Model
     }
     public function category()
     {
-    	return $this->belongsTo('App\Category');
+    	return $this->belongsTo('App\Category','category_id','id');
     }
     public function postType()
     {
-    	return $this->belongsTo('App\PostType','post_type');
+    	return $this->hasOne('App\Posttype','id','post_type');
     }
     public function contents()
     {

@@ -16,10 +16,24 @@
     <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="{{asset('css/clean-blog.css')}}" rel="stylesheet">
-
+    <link href="{{ asset('css/clean-blog.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/blog-post.css')}}" rel="stylesheet">
+   
+    <link href="{{asset('css/plugins/morris.css')}}" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+     <!-- jQuery -->
+    <script src="{{ asset('js/jquery.min.js')}}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="{{ asset('js/jqBootstrapValidation.js')}}"></script>
+    <script src="{{ asset('js/contact_me.js')}}"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="{{asset('js/clean-blog.min.js')}}"></script>
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -35,7 +49,7 @@
 <body>
 <section>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-custom navbar-fixed-top">
+    <nav class="navbar navbar-inverse  navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
@@ -85,7 +99,10 @@
         <!-- /.container -->
     </nav>
 </section>
+<div id="wrapper">
      @yield('content')
+    
+</div>
 
     <!-- Footer -->
     <footer>
@@ -124,18 +141,7 @@
         </div>
     </footer>
 
-    <!-- jQuery -->
-    <script src="{{ asset('js/jquery.min.js')}}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="{{asset('js/jqBootstrapValidation.js')}}"></script>
-    <script src="{{asset('js/contact_me.js')}}"></script>
-
-    <!-- Theme JavaScript -->
-    <script src="{{asset('js/clean-blog.min.js')}}"></script>
+   
 
 </body>
 
