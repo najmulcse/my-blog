@@ -19,13 +19,15 @@
                                 {{$post->body}}
                             </h3>
                        
-                        @if($contents=$post->contents)
+                        @if($contents = $post->contents)
                             @foreach($contents as $content)
-                                <a href="#" class="">{{$content->content}}</a>
+                                
+                                <a href="#" class=""><img class="img-responsive" src="{{asset('files/'.$content->id)}}">{{$content->content}}</a>
+                               
                                 <br>
                             @endforeach
                         @endif
-                        <p class="post-meta">Posted by <a href="#">{{$post->user->name}}</a> {{$post->created_at}}</p>
+                        <p class="post-meta">Posted by <a href="#">{{$post->user->name}}</a>on {{$post->created_at}}</p>
                     </div>
                     <hr>
                
