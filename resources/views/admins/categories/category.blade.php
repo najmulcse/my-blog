@@ -70,7 +70,7 @@
                                <div class="form-group error">
                                    <label for="inputTask" class="col-sm-3 control-label">Category Name</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control has-error" id="title" name="title" placeholder="Task" value="">
+                                       <input type="text" class="form-control has-error" id="title" name="title" placeholder="Category name" value="">
                                    </div>
                                </div>
 
@@ -135,11 +135,8 @@
 
 
             $('#update_cat').click(function(e){
-                      $.ajaxSetup({
-                        headers: {
-                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                      }
-                      });
+
+                     
                      e.preventDefault();
                      var formDatas = {
 
@@ -148,21 +145,25 @@
                      }  
                     // console.log(formDatas);
                      var cat_id = $('#cat_id').val();
+                      $.ajaxSetup({
+                        headers: {
+                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                      }
+                      });
 
                      $.ajax({
                       url        : "/categoryUpdateAjax/" + cat_id ,
-                      type       : "PUT" ,
+                      type       : "POST" ,
                       dataType   : 'json' ,
-                      headers    : {
-                                  'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                              },
-                      data       : formDatas,
+                     
+                      data       : JSON.stringify(formDatas),
                       success    : function(data){
 
-                                  console.log(data);
-                                  $('title'+cat_id).replaceWith('#title');
+                                 if(data.cat === 'success'){
+                                  $('#title'+cat_id).replaceWith('#title');
                                   $('#frmTasks').trigger("reset");
                                   $('myModal').modal('hide');
+                                  }
                       },
                       error      : function(err){
                                   console.log(err);

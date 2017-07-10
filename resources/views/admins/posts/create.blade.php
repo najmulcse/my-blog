@@ -7,7 +7,7 @@
 		<ul class="list-inline">
 		   <li class="list-inline-item"> 
 		   		<a class="btn btn-success btn-sm" href="{{route('allPostAdmin')}}" role="button">Back</a> </li>
-		   	<li class="list-inline-item"><h2>Create post</h2></li>
+		  
 		    
 		</ul>
 		
