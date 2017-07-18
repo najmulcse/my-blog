@@ -9,12 +9,17 @@ use App\Post;
 use App\Category;
 use App\PostType;
 use App\Content;
+use App\Comment;
 use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     
 
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+        
+    }
     public function storePost(Request $request){
 
     	$rules =[
@@ -46,10 +51,25 @@ class PostController extends Controller
         }
     	return back()->with('msg','Post created Successfully');
     }
+    public function createPost()
+    {
+        $categories = Category::orderBy('created_at','desc')->get();
+        $postTypes   = PostType::all();
+        return view('admins.posts.create',compact('categories','postTypes'));
+    }
 
     public function allPostSeeByAdmin(){
         $posts   = Post::all();
         return view('admins.posts.allPosts',compact('posts'));
+    }
+
+    public function myPost()
+    {
+        $posts = Post::where('user_id',Auth::id())
+                        ->orderBy('created_at','desc')
+                        ->get();
+        $categories = Category::orderBy('created_at','desc')->get();
+        return view('posts.userPost',compact('posts','categories'));
     }
 
     public function edit($pid){
@@ -98,20 +118,6 @@ class PostController extends Controller
         return back()->with('msg','Post updated Successfully');
     }
 
-    public function details($pid)
-    {
-        $post       = Post::findOrFail($pid);
-        return view('admins.posts.individualPost',compact('post'));
-    }
-
-    public function viewCategory($cid){
-        $posts   = Post::where('category_id',$cid)
-                        ->orderBy('created_at','desc')
-                        ->get();
-        $user = Auth::user();
-        $categories = Category::orderBy('created_at','desc')->get();
-        return view('categories.viewAllCat',compact('posts','categories','user'));
-    }
 
 
     public function categoryEditByAjax($id)
@@ -133,12 +139,23 @@ class PostController extends Controller
         return json_encode($cat);
     }
 
-
-    public function postDetails($cid,$pid)
+    public function postDelete($id)
     {
-        $post = Post::findOrFail($pid);
-        $user = Auth::user();
-        $categories = Category::orderBy('created_at','desc')->get();
-        return view('posts.postDetails',compact('post','categories','user'));
+        $post = Post::findOrFail($id)
+                    ->where('user_id',Auth::id())
+                    ->delete();
+        if($post)
+        {
+            Comment::where('post_id',$id)->delete();
+            Content::where('post_id',$id)->delete();
+            return redirect()->route('home')->with('msg', "Deleted successfully");
+        }
+
+        return back();
+
     }
+
+   
+
+    
 }

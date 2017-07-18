@@ -1,36 +1,10 @@
-@extends('layouts.adminLayout')
+@extends('layouts.bloglayout')
 
 
 
-@section('admin_content')
+@section('blog_body')
+<div class="container-fluid">
 
-<div class="row">
-	<div class="col-sm-8">
-		<ul class="list-inline">
-		   <li class="list-inline-item"> 
-		   		<a class="btn btn-success btn-sm" href="{{route('createPost')}}" role="button">Create new Post</a> </li>
-		   <li class="list-inline-item">
-		   		<h2 class="text-center">All posts</h2>
-		   </li>
-		    
-		</ul>
-		
-	</div>
-	<div class="col-sm-4">
-		
-		<form action="" method="POST" class="form-inline" role="form">
-		
-			<div class="form-group">
-				<label class="sr-only" for="">label</label>
-				<input type="text" class="form-control" id="" placeholder="Search...">
-			</div>
-		
-			
-		
-			<button type="submit" class="btn btn-primary">Search</button>
-		</form>
-	</div>
-</div>
 
 <div class="table-responsive">
 	<table class="table table-hover">
@@ -66,5 +40,5 @@
 		</tbody>
 	</table>
 </div>
-
+</div>
 @endsection

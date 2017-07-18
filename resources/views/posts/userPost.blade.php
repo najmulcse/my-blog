@@ -18,7 +18,7 @@
                        <div class="col-sm-11">
                             <div>
                                         
-                                @if( Auth::id() == $post->user_id)
+                                
                                        <div class="pull-right">
                                            <ul class="nav navbar-nav navbar-right">
                                                 <li class="dropdown">
@@ -28,7 +28,7 @@
                                                     <ul class="dropdown-menu" role="menu">
                                                           <li><a href="{{route('editPost',['pid'=>$post->id])}}"><i class="fa fa-pencil fa-fw"></i>Edit</a></li>
 
-                                                          <li><a onclick="return confirm('are you sure?')" href=""><i class="fa fa-trash-o fa-fw"></i>Delete</a></li> 
+                                                          <li><a onclick="return confirm('are you sure?')" href="{{route('delete.post',['id'=>$post->id])}}"><i class="fa fa-trash-o fa-fw"></i>Delete</a></li> 
                                                       
                                                     </ul>
                                                 </li>
@@ -36,7 +36,7 @@
                                        </div>
 
                                   
-                                 @endif       
+                                    
                             </div>
                             
                                    <div class="post-preview" style="padding-left: 10%;">

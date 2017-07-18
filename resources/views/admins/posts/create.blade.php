@@ -1,32 +1,7 @@
-@extends('layouts.adminLayout')
+@extends('layouts.bloglayout')
 
-@section('admin_content')
-
-<div class="row">
-	<div class="col-sm-8">
-		<ul class="list-inline">
-		   <li class="list-inline-item"> 
-		   		<a class="btn btn-success btn-sm" href="{{route('allPostAdmin')}}" role="button">Back</a> </li>
-		  
-		    
-		</ul>
-		
-	</div>
-	<div class="col-sm-4">
-		
-		<form action="" method="POST" class="form-inline" role="form">
-		
-			<div class="form-group">
-				<label class="sr-only" for="">label</label>
-				<input type="text" class="form-control" id="" placeholder="Search...">
-			</div>
-		
-			
-		
-			<button type="submit" class="btn btn-primary">Search</button>
-		</form>
-	</div>
-</div>
+@section('blog_body')
+<div class="container-fluid">
 <div class="row">
 	<div class="col-lg-8 col-sm-8 col-sm-offset-1">
 		<form action="{{route('storePost')}}" method="POST" class="form-horizontal" role="form" enctype="multipart/form-data" >
@@ -99,8 +74,7 @@
 	</div>
 	<div class="col-sm-2"></div>
 </div>
-
-
+</div>
 @endsection
 
 

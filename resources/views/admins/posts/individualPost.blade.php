@@ -1,7 +1,7 @@
-@extends('layouts.adminLayout')
+@extends('layouts.bloglayout')
 
 
-@section('admin_content')
+@section('blog_body')
 	<a href="{{route('allPostAdmin')}}" class="btn btn-primary">Back</a>
 	<div class="panel panel-default">
 		<!-- Default panel contents -->

@@ -12,7 +12,7 @@ class PostTypeTableSeeder extends Seeder
     public function run()
     {
         DB::table('postTypes')->insert([
-                    'type'  => 'public' ,
+                    'type'  => 'published' ,
                   ]);
         DB::table('postTypes')->insert([
                     'type'  => 'draft' ,

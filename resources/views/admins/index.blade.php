@@ -1,8 +1,8 @@
-  @extends('layouts.adminLayout')
+  @extends('layouts.bloglayout')
 
 
-  @section('admin_content')
-
+  @section('blog_body')
+<div class="container-fluid">
   <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -117,5 +117,5 @@
                
                 
 
-
+</div>
    @endsection             

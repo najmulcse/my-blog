@@ -16,7 +16,14 @@
             </div>
         </div>
     </header>
-
+    <div class="">
+        <ul class="pager">
+            <li class="next">
+                <a href="{{route('createPost')}}" class="btn ">Create Post </a>
+             </li>
+        </ul>
+    </div>
+                        
     <!-- Main Content -->
     <div class="container" >
         <div class="row">
@@ -24,13 +31,22 @@
 
                 @if(!empty($posts))
                     @foreach($posts as $post)
-                        <div class="post-preview">
+                    <div class="row">
+                        <div class="col-sm-1">
+                             <figure>
+                            <img class="img-responsive" src="{{asset('img/my.jpg')}}">
+                          </figure>
+                          <label>{{ $post->user->name }}</label>
+                        </div>
+                        <div class="col-sm-11" style="padding-left: 5%;">
+                            <div class="post-preview">
+
                             <a href="{{route('postDetails',['pid'=>$post->id,'cid'=>$post->category_id])}}">
                                 <h2 class="post-title">
                                    {{$post->title}}
                                 </h2>
                                 <h3 class="post-subtitle">
-                                    {{$post->body}}
+                                    {!! nl2br($post->body)!!}
                                 </h3>
                             </a>
                             @if($contents=$post->contents)
@@ -41,17 +57,20 @@
                             @endif
                             <p class="post-meta">Posted by <a href="#">{{$post->user->name}}</a> on {{$post->created_at}}</p>
                         </div>
+                        </div>
+                    </div>
+                        
                         <hr>
                     @endforeach
                 @endif
 
                 
-                <!-- Pager -->
+               {{--  <!-- Pager -->
                 <ul class="pager">
                     <li class="next">
                         <a href="#">Older Posts &rarr;</a>
                     </li>
-                </ul>   
+                </ul>   --}} 
             </div>
             <div class="col-lg-3 col-md-2 col-sm-2">
              <h2>Categories</h2>
@@ -59,6 +78,7 @@
                     @if(!empty($categories))
                         @foreach($categories as $category)
                           <li> <a href="{{route('viewCategory',['cid' =>$category->id])}}">{{$category->title}}</a> </li>
+                          
                         @endforeach
                            
                      @endif

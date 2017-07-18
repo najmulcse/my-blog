@@ -1,8 +1,8 @@
-@extends('layouts.adminLayout')
+@extends('layouts.bloglayout')
 
 
-@section('admin_content')
-
+@section('blog_body')
+<div class="container-fluid">
 <div class="row">
 	<div class="col-sm-4 col-sm-offset-1">
 		<form action="{{route('cStore')}}" method="POST" class="form-horizontal" role="form">
@@ -104,6 +104,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
            <script type="text/javascript">
            

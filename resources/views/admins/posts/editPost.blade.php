@@ -1,7 +1,7 @@
-@extends('layouts.adminLayout')
+@extends('layouts.bloglayout')
 
-@section('admin_content')
-
+@section('blog_body')
+<div class="container-fluid">
 <div class="row">
 	<div class="col-sm-12">
 		<ul class="list-inline">
@@ -96,7 +96,7 @@
 	<div class="col-sm-2"></div>
 </div>
 
-
+</div>
 @endsection
 
 

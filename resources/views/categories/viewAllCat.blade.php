@@ -1,14 +1,39 @@
 @extends('layouts.blogLayout')
 
 
-@section('content')
+@section('blog_body')
 
-<div class="container >
+<div class="container-fluid" >
     <div class="row">
         <div class="col-lg-9 col-lg-offset-0 col-md-10 col-sm-10">
-
-            @if(!empty($posts))
+          @if(!empty($posts))
                 @foreach($posts as $post)
+            <div class="row">
+              <div class="col-sm-1">
+                 <figure>
+                            <img class="img-responsive" src="{{asset('img/my.jpg')}}">
+                          </figure>
+                          <label>{{ $post->user->name }}</label>
+              </div>
+              <div class="col-sm-11 " style="padding-left: 5%;">
+                 @if($post->user_id == Auth::id())
+                          <div class="pull-right">
+
+                                           <ul class="nav navbar-nav navbar-right">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                                             <span class=""><i class="fa fa-cog"></i></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                          <li><a href="{{route('editPost',['pid'=>$post->id])}}"><i class="fa fa-pencil fa-fw"></i>Edit</a></li>
+
+                                                          <li><a onclick="return confirm('are you sure?')" href="{{route('delete.post',['id'=>$post->id])}}"><i class="fa fa-trash-o fa-fw"></i>Delete</a></li> 
+                                                      
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                       </div>
+                        @endif          
                     <div class="post-preview">
                         <a href="{{route('postDetails',['pid'=>$post->id,'cid'=>$post->category_id])}}">
                             <h2 class="post-title">
@@ -18,7 +43,7 @@
                                 {{$post->body}}
                             </h3>
                         </a>
-                        @if($contents=$post->contents)
+                        @if($contents = $post->contents)
                             @foreach($contents as $content)
                                  <a href="#" class=""><img class="img-responsive" src="{{asset('files/'.$content->id)}}">{{$content->content}}</a>
                                  <br>
@@ -37,6 +62,7 @@
                                                    <label>{{ $comment->user->name }}</label>
                                           </div>
                                           <div class="col-sm-11">
+                          @if(!empty($user))
                              @if( $user->id == $comment->user_id)
                                 <div class="pull-right">
                                     <ul class="nav navbar-nav navbar-right">
@@ -53,14 +79,17 @@
                                          </ul>
                                      </div>
                                  @endif
-                                              
-                                              <p> {{$comment->body}}</p>
+                               @endif               
+                                              <p style="padding-left: 10px;"> {{$comment->body}}</p>
                                           </div>
                                                 
                                   </div>  
                                @endforeach  
                                         
                                         <!--for comment submission form-->
+                                @if (Auth::guest())
+                                <a type="button" href="{{url('/login')}}" class="btn btn-default">Login</a>
+                                @else         
                                  <div class="row">
                                         <div class="col-sm-1">
                                                <img class="img-responsive" src="{{asset('img/my.jpg')}}">
@@ -85,16 +114,17 @@
                                               </form>
                                         </div>
                                   </div>   <!-- comment submission form ended-->
-                @endforeach
-            @endif
+                                  @endif
+              
+              </div>
+            </div>
 
-            
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="next">
-                    <a href="#">Older Posts &rarr;</a>
-                </li>
-            </ul>   
+              @endforeach
+          
+              @else
+              <h3>Empty</h3>
+              @endif
+          
         </div>
         <div class="col-lg-3 col-md-2 col-sm-2">
         <h2>Categories</h2>
@@ -108,6 +138,8 @@
                 
             </ul>
         </div>
+        </div>
     </div>
-</div>
+
+
 @endsection

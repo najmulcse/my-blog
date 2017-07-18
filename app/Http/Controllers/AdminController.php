@@ -41,12 +41,7 @@ class AdminController extends Controller
         return back()->with('msg', "Category added successfully");
     }
 
-    public function createPost()
-    {
-        $categories = Category::orderBy('created_at','desc')->get();
-        $postTypes   = PostType::all();
-        return view('admins.posts.create',compact('categories','postTypes'));
-    }
+    
 
     public function valid(Request $req)
     {
